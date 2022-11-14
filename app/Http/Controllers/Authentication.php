@@ -65,10 +65,17 @@ class Authentication extends Controller
 
     public function verifyCode(Request $request)
     {
+        $request->validate([
+            'phone' => ['required'],
+            'code' => ['required'],
+        ]);
         $userPhone=$request['phone'];
         $code=$request['code'];
         $verificationCode=verification_code::whereIn('user_id',User::where('phoneNum',$userPhone)->select('id')->first())->select('verification_code')->first();
-        if($verificationCode['verification_code']==$code)
+        $is_verfied=User::where('phoneNum',$userPhone)->select('isVerified')->first();
+        if ($is_verfied['isVerified'])
+            return response('you are already verified.',403);
+        elseif($verificationCode['verification_code']==$code)
         {
             $user=User::where('phoneNum',$userPhone)->first();
             $user->isVerified=true;

@@ -24,6 +24,13 @@ Route::middleware('auth:sanctum')->group( function () {
     Route::post('createTag',[\App\Http\Controllers\tags::class, 'createTag']);
     Route::post('updateTag',[\App\Http\Controllers\tags::class, 'updateTag']);
     Route::post('deleteTag',[\App\Http\Controllers\tags::class, 'deleteTag']);
-    
-});
+    Route::get('getUserPosts',[\App\Http\Controllers\posts::class, 'getUserPosts']);
+    Route::post('createPost',[\App\Http\Controllers\posts::class, 'createPost']);
+    Route::get('getSinglePost',[\App\Http\Controllers\posts::class, 'getSinglePost']);
+    Route::get('deletePost',[\App\Http\Controllers\posts::class, 'deletePost']);
+    Route::get('showDeletedPosts',[\App\Http\Controllers\posts::class, 'showDeletedPosts']);
+    Route::get('restoreSingleDeletedPost',[\App\Http\Controllers\posts::class, 'restoreSingleDeletedPost']);
+    Route::post('update',[\App\Http\Controllers\posts::class, 'update']);
 
+});
+Route::get('getData',[\App\Http\Controllers\state::class, 'getData']);
