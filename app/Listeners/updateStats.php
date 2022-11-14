@@ -27,6 +27,8 @@ class updateStats
     public function handle(\App\Events\updateStats$event)
     {
         $response=[\App\Http\Controllers\posts::class, 'update'];
-        Cache::Put ("satatData",$response);
+        Cache::Put ("UsersCount",$response['allUserCount']);
+        Cache::Put ("postCount",$response['allPost']);
+        Cache::Put ("usersWithZeroPost",$response['usersWithZeroPosts']);
     }
 }
